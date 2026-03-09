@@ -6,6 +6,9 @@ CCLaboratories Biodiversity Atlas
 */
 
 body {
+    background-image: url("background.jpg");
+    background-size: cover;
+    font-family: 'Press Start 2P', cursive;
     background-color: white;
     color: DimGray;
     font-family: 'Courier New', Courier, monospace;
