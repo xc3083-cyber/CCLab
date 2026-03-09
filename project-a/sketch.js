@@ -1,10 +1,3 @@
-/*
-Template for IMA's Creative Coding Lab 
-
-Project A: Generative Creatures
-CCLaboratories Biodiversity Atlas 
-*/
-
 let state;
 let gx;
 let gy;
@@ -31,6 +24,12 @@ let targetScale;
 let virusX;
 let virusY;
 let angryStartTime;
+//
+let shootLaser = false;
+//
+let TokenX = 100;
+let TokenY = 400;
+let dragging = false;
 
 
 
@@ -40,7 +39,7 @@ function setup() {
     let canvas = createCanvas(800, 500);
     canvas.id("p5-canvas");
     canvas.parent("p5-canvas-container");
-
+    //createCanvas(800,500);
     state = "patrol"
     gx = width / 2;
     gy = height / 2;
@@ -57,6 +56,7 @@ function setup() {
     patrolY = gy;
     patrolScale = 1;
     targetScale = 1;
+    //
     virusX = 0;
     virusY = 0;
 
@@ -103,18 +103,21 @@ function draw() {
     }
     pixelCircle(gx + 0.65 * someOffsetX, gy + 0.65 * someOffsetY, length * 0.65 * 0.3, 10 * 0.65, "black", fallAmount)
     pixelCircle(gx - 15 * 0.65 + someOffsetX * 0.65, gy - 15 * 0.65 + someOffsetY * 0.65, length * 0.65 * 0.04, 10 * 0.65, "white", fallAmount)
+    //pixelCircle(gx+0.65*someOffsetX,gy+0.65*someOffsetY,14,5, "rgb(180,255,255)", fallAmount); 
     drawLazer(gx, gy)
+    if (shootLaser) {
+        push();
+        strokeWeight(10);
+        stroke("green");
+        line(gx + 0.65 * someOffsetX, gy + 0.65 * someOffsetY, virusX, virusY);
+        pop();
+        shootLaser = false;
+    }
     pop();
-
     //drawGrid(10)
     fallApartManager()
     virusManager()
-
-
-
-
-
-
+    drawFood()
 
 }
 
@@ -153,6 +156,7 @@ function keyPressed() {
 
     }
 
+
 }
 
 function pixelCircle(x, y, r, s, col = 255, fallAmount = 0) {
@@ -169,12 +173,6 @@ function pixelCircle(x, y, r, s, col = 255, fallAmount = 0) {
                 fallApartY = fallAmount * sin(frameCount / 50 - j)
 
                 rect(i - s + map(noiseOffset, 0, 1, -30, 30) + fallApartX, j + s + map(noiseOffset, 0, 1, -30, 30) + fallApartY, s, s)
-
-
-
-
-
-
             }
 
         }
@@ -251,7 +249,7 @@ function patrolState() {
         if (frameCount % 100 == 0) {
             patrolX = random(margin, width - margin)
             patrolY = random(margin, height - margin)
-            targetScale = random(0.3, 1.2)
+            targetScale = random(0.6, 1.2)
 
         }
 
@@ -280,6 +278,9 @@ function drawBackground(s) {
 
 
 function virusManager() {
+    if (dragging) {
+        return
+    }
     virusX = mouseX;
     virusY = mouseY;
     pixelCircle(virusX, virusY, 10, 10, "red", 10)
@@ -298,14 +299,8 @@ function virusManager() {
             fallApart = true
             gx = lerp(gx, virusX, 0.06)
             gy = lerp(gy, virusY, 0.06)
-
-            //发射激光
-            push();
-            strokeWeight(10);
-            stroke("green")
-            line(gx, gy, virusX, virusY)
-            pop();
             state = "patrol"
+            shootLaser = true;
         }
 
 
@@ -315,3 +310,115 @@ function virusManager() {
 
 }
 
+
+function drawFood() {
+    pixelCircle(TokenX, TokenY, 5, 10, "rgb(123,145,200)", 10);
+    if (dragging) {
+        TokenX = lerp(TokenX, mouseX, 0.06);
+        TokenY = lerp(TokenY, mouseY, 0.06)
+        let d = dist(TokenX, TokenY, gx, gy);
+        if (d < 30) {
+            fallApart = true;
+            endTime = millis()
+        }
+    }
+    TokenX += 0.1;
+    TokenY += 0.1;
+
+
+}
+
+function mousePressed() {
+    if (dist(mouseX, mouseY, TokenX, TokenY) < 20) {
+        dragging = true;
+    }
+}
+
+function mouseReleased() {
+    dragging = false
+    patrolScale += 0.1
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function pixelTen(startX, startY, tenwidth, tenheight, tencol = 255, a = 0, tentagle = 1, tenAngle = 0) {
+    //   let s=10;
+    //   let j=startY;
+    //   push();
+    //   translate(startX,startY);
+    //   rotate(radians(tenAngle))
+
+    //    while(j<=startY+tenheight){
+    //     let i=startX;
+    //     while(i<=startX+tenwidth){
+    //       if(i>=startX+a&&i<=startX+tenwidth-a){
+    //         fill(tencol)
+    //         rect(i-s,j-s,s,s)
+    //       }
+    //       i+=s;
+    //           }
+    //      a+=tentagle;
+    //      j+=s;
+
+
+    //   }
+    //   pop();
+}
