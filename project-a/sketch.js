@@ -243,13 +243,13 @@ function drawLazer(gx, gy, sWeight = 3, sColor = "black", sLength = 700) {
 
 function patrolState() {
     if (state == "patrol") {
-        let maxScale = 1.5;
+        let maxScale = 1.2;
         let margin = length * maxScale;
 
         if (frameCount % 100 == 0) {
             patrolX = random(margin, width - margin)
             patrolY = random(margin, height - margin)
-            targetScale = random(0.6, 1.2)
+            targetScale = random(0.5, 1.2)
 
         }
 
@@ -320,10 +320,10 @@ function drawFood() {
         if (d < 30) {
             fallApart = true;
             endTime = millis()
+
         }
     }
-    TokenX += 0.1;
-    TokenY += 0.1;
+
 
 
 }
@@ -336,7 +336,7 @@ function mousePressed() {
 
 function mouseReleased() {
     dragging = false
-    patrolScale += 0.1
+
 }
 
 
