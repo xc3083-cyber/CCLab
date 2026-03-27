@@ -1,3 +1,7 @@
+
+
+//just a test
+
 let ricks = [];
 let curImage = 0;
 
