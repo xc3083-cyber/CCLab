@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "object-dancers",
+			"path": "../../../../Desktop/object-dancers"
+		},
+		{
+			"name": "CCLab",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"liveServer.settings.multiRootWorkspaceName": "CCLab"
+	}
+}
