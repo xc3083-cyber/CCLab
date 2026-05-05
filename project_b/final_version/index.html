@@ -7,10 +7,14 @@
 
   <title>CCLab Project</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <script src="lib/p5.js"></script>
   <script src="lib/p5.sound.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 
   <!-- Alternatively, you can import the library via CDN (Content Delivery Network). -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.js"></script> -->
@@ -19,15 +23,17 @@
 
 <body>
 
+  <img class="hero-image" src="web_page.jpg" alt="Echoes of the Ancient Sands">
+
   <div class="main-wrapper">
-    <h1>Project Title</h1>
+    <h1>Echoes of the Ancient Sands</h1>
+
+    <p>As sand drifts across a silent landscape, traces of an ancient civilization begin to emerge. This project reimagines cultural memory as something fluid and intangible, where history is not preserved in form, but in spirit.</p>
 
     <!-- the following div will contain the p5 canvas. -->
     <div id="p5-canvas-container">
       <!-- p5 canvas will be appended here. -->
     </div>
-
-    <p>Project Description</p>
   </div>
 
   <!-- the script tag below should always be at the bottom, right before the closing body tag -->
